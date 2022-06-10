@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    {% if data_list %}
+    	<table border="1px">
+	<tr>
+                <td>ID</td>
+                <td>Время</td> 
+                
+                <td>Воздух</td>
+                <td>Период.мин</td>
+		<td>Длит.мин</td>
+
+		<td>Темп.1,C</td>
+		<td>Темп.2,C</td>
+		<td>Темп.3,C</td>
+		<td>Темп.4,C</td>
+		<td>Темп.5,C</td>
+		<td>Темп.6,C</td>
+<!--
+		<td>K.Нагр.1,С</td>
+		<td>K.Нагр.2,С</td>
+		<td>K.Нагр.3,С</td>
+		<td>K.Нагр.4,С</td>
+		<td>K.Нагр.5,С</td>
+		<td>K.Нагр.6,С</td>
+
+		<td>Темп.1,F</td>
+                <td>Темп.2,F</td>
+                <td>Темп.3,F</td>
+                <td>Темп.4,F</td>
+                <td>Темп.5,F</td>
+                <td>Темп.6,F</td>
+
+		<td>K.Нагр.1,F</td>
+                <td>K.Нагр.2,F</td>
+                <td>K.Нагр.3,F</td>
+                <td>K.Нагр.4,F</td>
+                <td>K.Нагр.5,F</td>
+                <td>K.Нагр.6,F</td>
+-->
+                <td>Влаж.1</td>
+		<td>Влаж.2</td>
+		<td>Влаж.3</td>
+		<td>Влаж.4</td>
+		<td>Влаж.5</td>
+		<td>Влаж.6</td>
+
+                <td>Движ.1</td>
+		<td>Движ.2</td>
+		<td>Движ.3</td>
+		<td>Движ.4</td>
+
+                <td>Звук.1</td>
+		<td>Звук.2</td>
+		<td>Звук.3</td>
+		<td>Звук.4</td>
+
+        </tr>	
+        {% for a in data_list %}
+	<tr>
+		<td>{{a.id}}</td>
+		<!--	<td>{{a.pub_date}}</td> -->
+		<td>{{a.pub_date|date:'Y-m-d H:i:s.u' }}</td>
+	
+		<td>{{a.fan}}</td>
+		<td>{{a.period}}</td>
+		<td>{{a.duration}}</td>
+
+		<td>{{a.tempc1}}</td>
+		<td>{{a.tempc2}}</td>
+		<td>{{a.tempc3}}</td>
+		<td>{{a.tempc4}}</td>
+		<td>{{a.tempc5}}</td>
+		<td>{{a.tempc6}}</td>
+<!--
+		<td>{{a.hic1}}</td>
+		<td>{{a.hic2}}</td>
+		<td>{{a.hic3}}</td>
+		<td>{{a.hic4}}</td>
+		<td>{{a.hic5}}</td>
+		<td>{{a.hic6}}</td>
+
+		<td>{{a.tempf1}}</td>
+                <td>{{a.tempf2}}</td>
+                <td>{{a.tempf3}}</td>
+                <td>{{a.tempf4}}</td>
+                <td>{{a.tempf5}}</td>
+                <td>{{a.tempf6}}</td>
+
+                <td>{{a.hif1}}</td>
+                <td>{{a.hif2}}</td>
+                <td>{{a.hif3}}</td>
+                <td>{{a.hif4}}</td>
+                <td>{{a.hif5}}</td>
+                <td>{{a.hif6}}</td>
+-->		
+		<td>{{a.humidity1}}</td>
+		<td>{{a.humidity2}}</td>
+		<td>{{a.humidity3}}</td>
+		<td>{{a.humidity4}}</td>
+		<td>{{a.humidity5}}</td>
+		<td>{{a.humidity6}}</td>
+
+		<td>{{a.motion1}}</td>
+		<td>{{a.motion2}}</td>
+		<td>{{a.motion3}}</td>
+		<td>{{a.motion4}}</td>
+
+		<td>{{a.audio1}}</td>
+		<td>{{a.audio2}}</td>
+		<td>{{a.audio3}}</td>
+		<td>{{a.audio4}}</td>
+	 
+	</tr>
+	{% endfor %}
+	</table>
+    {% else %}
+    	Данные не найдены -----
+
+    {% endif %} 
+
+{% endblock %}
