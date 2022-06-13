@@ -16,11 +16,11 @@ class Data(models.Model):
     audio4 = models.IntegerField('audio4')
 
     ### Motion
-    motion1 = models.IntegerField('motion1')
-    motion2 = models.IntegerField('motion2')
-    motion3 = models.IntegerField('motion3')
-    motion4 = models.IntegerField('motion4')
-
+    #motion1 = models.IntegerField('motion1')
+    #motion2 = models.IntegerField('motion2')
+    #motion3 = models.IntegerField('motion3')
+    #motion4 = models.IntegerField('motion4')
+   
     ### Humidity
     humidity1 = models.FloatField('humidity1')
     humidity2 = models.FloatField('humidity2')
@@ -28,7 +28,9 @@ class Data(models.Model):
     humidity4 = models.FloatField('humidity4')
     humidity5 = models.FloatField('humidity5')
     humidity6 = models.FloatField('humidity6')
-
+    humidity7 = models.FloatField('humidity7')
+    humidity8 = models.FloatField('humidity8')
+    
     ### Temperature C
     tempc1 = models.FloatField('tempc1')
     tempc2 = models.FloatField('tempc2')
@@ -36,6 +38,9 @@ class Data(models.Model):
     tempc4 = models.FloatField('tempc4')
     tempc5 = models.FloatField('tempc5')
     tempc6 = models.FloatField('tempc6')
+    tempc7 = models.FloatField('tempc7')
+    tempc8 = models.FloatField('tempc8')
+
     ### Temperature F
     #tempf1 = models.FloatField('tempf1')
     #tempf2 = models.FloatField('tempf2')
