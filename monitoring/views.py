@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
 from .models import Data, Fan
 from django.views.decorators.csrf import csrf_exempt
 from .forms import DataForm
@@ -8,6 +9,8 @@ import csv
 
 period = 100
 duration = 20
+
+API_KEY = 1
 
 def index(request):
     data_list = Data.objects.order_by('-pub_date') 
@@ -40,6 +43,13 @@ def set_period(request, value):
         return HttpResponse("period=%s" % period)
     else:
         return HttpResponse("Wrong value: %s \r\nShould be in range (0,120]" % value)
+
+def get_last_json(request, value):
+    data_list = Data.objects.order_by('-pub_date')[:value]
+    post_list = serializers.serialize('json', data_list)
+    #return JsonResponse(serialized_object)
+    return HttpResponse(post_list, content_type="text/json-comment-filtered")
+
 
 def get_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.

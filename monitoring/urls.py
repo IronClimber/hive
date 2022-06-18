@@ -10,5 +10,6 @@ urlpatterns = [
     path("duration/<int:value>", views.set_duration, name="duration_value"),
     path("period/<int:value>", views.set_period, name="period_value"),
     path("csv/", views.get_csv, name="csv"),
-    path("last/<int:value>", views.get_last_objects, name="last_objects")
+    path("last/<int:value>", views.get_last_objects, name="last_objects"),
+    path("last/json/<int:value>", views.get_last_json, name="last_json")
 ]
