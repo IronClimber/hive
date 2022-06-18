@@ -7,7 +7,10 @@ import { getDataAPI } from '../api'
 import { Charts } from "./Charts";
 
 export function ControlPanel() {
-    const { data, isLoading, error } = useQuery('data', getDataAPI)
+    const { data, isLoading, error } = useQuery('data', getDataAPI, {
+        refetchIntervalInBackground: true,
+        refetchInterval: 30 * 1000//ms
+    })
 
     const handleReset = () => {
         console.log("reset")
