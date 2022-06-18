@@ -26,12 +26,13 @@ SECRET_KEY = 'django-insecure-c0p!v-60%*ej7w(1kq0jr$_0q^&g^x(ciio+flt8njd=ja_3wy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['134.209.90.29']
+ALLOWED_HOSTS = ['134.209.90.29', 'localhost', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'grappelli',
     'monitoring.apps.MonitoringConfig',
     'django.contrib.admin',
@@ -50,9 +51,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'hive.urls'
+
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:3000',
+)
 
 TEMPLATES = [
     {

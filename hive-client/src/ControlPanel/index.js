@@ -1,29 +1,35 @@
 import { Box, Button, Typography } from "@mui/material";
 import { FlashOn, FlashOff } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useQuery } from 'react-query'
+
 import { Buttons } from "./Buttons";
+import { getDataAPI } from '../api'
+import { Charts } from "./Charts";
 
 export function ControlPanel() {
-    const [fanMode, setFanMode] = useState(false); // destruction
-    const period = 60;
-    const duration = 15;
-
-    useEffect(() => {
-        // fetch("https://jsonplaceholder.typicode.com/posts/1")
-        //     .then((response) => response.json())
-        //     .then((json) => console.log(json)); test
-        //     .then((json) => set...(json));
-        setTimeout(() => {
-            setFanMode(true)
-        }, 5000)
-    }, [])
+    const { data, isLoading, error } = useQuery('data', getDataAPI)
 
     const handleReset = () => {
         console.log("reset")
-        setFanMode(false)
         // fetch("url", {
         //     method: "POST"
         // })
+    }
+
+    if (isLoading || !data) {
+        return (
+            <Typography variant="h2">
+                LOADING...
+            </Typography>
+        )
+    }
+
+    if (error) {
+        return (
+            <Typography variant="h2">
+                Something went wrong
+            </Typography>
+        )
     }
 
     return (
@@ -35,7 +41,7 @@ export function ControlPanel() {
                 alignItems: "center"
             }}>
                 {
-                    fanMode
+                    data[0].fields.period
                         ? <FlashOn color="success"/>
                         : <FlashOff color="error"/>
                 }
@@ -46,13 +52,15 @@ export function ControlPanel() {
                     Reset
                 </Button>
                 <Typography marginX={1}>
-                    Period: {period}
+                    Period: {data[0].fields.period}
                 </Typography>
                 <Typography marginX={1}>
-                    Duration: {duration}
+                    Duration: {data[0].fields.duration}
                 </Typography>
             </Box>
+
             <Buttons />
+            <Charts data={data} />
         </Box>
     )
 }
