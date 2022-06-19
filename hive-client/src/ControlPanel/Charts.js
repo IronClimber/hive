@@ -3,18 +3,14 @@ import {
      FormControl,
      InputLabel,
      Select,
-     MenuItem
+     MenuItem,
+     Typography
  } from "@mui/material"
 import { useState } from "react"
 
-export const Charts = () => {
+export const Charts = ({ data }) => {
+    console.log('<<=|X|=>> ~ file: Charts.js ~ line 11 ~ Charts ~ data', data);
     const [hive, setHive] = useState(1);
-
-    const handleSelectHive = (event) => {
-        // make request to backend to get new data for selected hive
-        setHive(event.target.value)
-        console.log('<<=|X|=>> ~ file: Charts.js ~ line 16 ~ handleSelectHive ~ event.target.value', event.target.value);
-    }
 
     return (
         <Box>
@@ -25,7 +21,7 @@ export const Charts = () => {
                     id="demo-simple-select"
                     value={hive}
                     label="Age"
-                    onChange={handleSelectHive}
+                    onChange={event => setHive(event.target.value)}
                 >
                     <MenuItem value={1}>One</MenuItem>
                     <MenuItem value={2}>Two</MenuItem>
@@ -37,6 +33,12 @@ export const Charts = () => {
                     <MenuItem value={8}>Eight</MenuItem>
                 </Select>
             </FormControl>
+            <Typography>
+                Temperature: {data[0].fields[`tempc${hive}`]}
+            </Typography>
+            <Typography>
+                Humidity: {data[0].fields[`humidity${hive}`]}
+            </Typography>
         </Box>
     )
 }

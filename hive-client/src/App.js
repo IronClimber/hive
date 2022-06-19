@@ -3,8 +3,8 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
+import { QueryClient, QueryClientProvider } from 'react-query'
 
-import { Charts } from "./Charts";
 import { ControlPanel } from "./ControlPanel";
 import { Header} from './Header'
 
@@ -23,14 +23,17 @@ const theme = createTheme({
   },
 });
 
+const queryClient = new QueryClient()
+
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header />
       <ControlPanel />
-      <Charts />
     </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
