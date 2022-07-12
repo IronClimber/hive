@@ -30,6 +30,7 @@ class Data(models.Model):
     humidity6 = models.FloatField('humidity6')
     humidity7 = models.FloatField('humidity7')
     humidity8 = models.FloatField('humidity8')
+    humidity9 = models.FloatField('humidity9')
     
     ### Temperature C
     tempc1 = models.FloatField('tempc1')
@@ -40,7 +41,8 @@ class Data(models.Model):
     tempc6 = models.FloatField('tempc6')
     tempc7 = models.FloatField('tempc7')
     tempc8 = models.FloatField('tempc8')
-
+    tempc9 = models.FloatField('tempc9')
+    
     ### Temperature F
     #tempf1 = models.FloatField('tempf1')
     #tempf2 = models.FloatField('tempf2')
