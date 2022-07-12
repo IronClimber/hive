@@ -4,7 +4,7 @@
 
 #define SENSOR_ERROR_VALUE (-404.0)
 
-#define REQUEST_PERIOD (5000)
+#define REQUEST_PERIOD (30000)
 
 #define DURATION_LIMIT (60)
 #define PERIOD_LIMIT (120)
@@ -60,6 +60,10 @@ float tempc7 = 0;
 float humidity8 = 0;
 float tempc8 = 0;
 
+//Sensor 9
+float humidity9 = 0;
+float tempc9 = 0;
+
 //Temperature and humidity sensors
 #define DHTPIN1 1
 #define DHTTYPE1 DHT22   
@@ -92,6 +96,10 @@ DHT dht7(DHTPIN7, DHTTYPE7);
 #define DHTPIN8 9
 #define DHTTYPE8 DHT22   
 DHT dht8(DHTPIN8, DHTTYPE8);
+
+#define DHTPIN9 10
+#define DHTTYPE9 DHT22   
+DHT dht9(DHTPIN9, DHTTYPE9);
 
 //Timer to control fan
 uint32_t fan_timer = millis();
@@ -155,6 +163,7 @@ void setup() {
   dht6.begin();
   dht7.begin();
   dht8.begin();
+  dgt9.begin();
 }
 
 //---------LOOP---------------------------------------
@@ -290,6 +299,12 @@ void loop() {
     float tempc8 = dht8.readTemperature();
     if (isnan(tempc8)) tempc8 = SENSOR_ERROR_VALUE;
 
+    //Sensor 9
+    float humidity9 = dht9.readHumidity();
+    if (isnan(humidity9)) humidity9 = SENSOR_ERROR_VALUE;
+    float tempc9 = dht9.readTemperature();
+    if (isnan(tempc9)) tempc9 = SENSOR_ERROR_VALUE;
+
     Serial.println(humidity1);
     Serial.println(humidity2);
     Serial.println(humidity3);
@@ -298,6 +313,7 @@ void loop() {
     Serial.println(humidity6);
     Serial.println(humidity7);
     Serial.println(humidity8);
+    Serial.println(humidity9);
 
     //-----------------------Communication part------------------------
     client.stop();
@@ -320,6 +336,7 @@ void loop() {
             "%s%s\"humidity6\"\r\n\r\n%d.%01d\r\n"
             "%s%s\"humidity7\"\r\n\r\n%d.%01d\r\n"
             "%s%s\"humidity8\"\r\n\r\n%d.%01d\r\n"
+            "%s%s\"humidity9\"\r\n\r\n%d.%01d\r\n"
             "%s%s\"tempc1\"\r\n\r\n%d.%01d\r\n"
             "%s%s\"tempc2\"\r\n\r\n%d.%01d\r\n"
             "%s%s\"tempc3\"\r\n\r\n%d.%01d\r\n"
@@ -328,6 +345,7 @@ void loop() {
             "%s%s\"tempc6\"\r\n\r\n%d.%01d\r\n"
             "%s%s\"tempc7\"\r\n\r\n%d.%01d\r\n"
             "%s%s\"tempc8\"\r\n\r\n%d.%01d\r\n"
+            "%s%s\"tempc9\"\r\n\r\n%d.%01d\r\n"
             "--%s--",
             __DELIMITER, __FORM_DATA, fan,
             __DELIMITER, __FORM_DATA, period, 
@@ -344,6 +362,7 @@ void loop() {
             __DELIMITER, __FORM_DATA, int(humidity6), (int)(humidity6*100)%100,
             __DELIMITER, __FORM_DATA, int(humidity7), (int)(humidity7*100)%100, 
             __DELIMITER, __FORM_DATA, int(humidity8), (int)(humidity8*100)%100,
+            __DELIMITER, __FORM_DATA, int(humidity9), (int)(humidity9*100)%100,
             __DELIMITER, __FORM_DATA, int(tempc1), (int)(tempc1*100)%100,
             __DELIMITER, __FORM_DATA, int(tempc2), (int)(tempc2*100)%100, 
             __DELIMITER, __FORM_DATA, int(tempc3), (int)(tempc3*100)%100, 
@@ -352,6 +371,7 @@ void loop() {
             __DELIMITER, __FORM_DATA, int(tempc6), (int)(tempc6*100)%100,
             __DELIMITER, __FORM_DATA, int(tempc7), (int)(tempc7*100)%100, 
             __DELIMITER, __FORM_DATA, int(tempc8), (int)(tempc8*100)%100,
+            __DELIMITER, __FORM_DATA, int(tempc9), (int)(tempc9*100)%100,
             __BOUNDARY
     );
     
